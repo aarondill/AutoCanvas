@@ -75,7 +75,7 @@ import {
 		const dateColor = count % 2 === checkNum ? "Blue" : "Orange";
 		return dateColor;
 	}
-	function openCanvas<CanvasLinks extends Record<string | number, string>>(
+	function openCanvas<CanvasLinks extends Record<string, string>>(
 		id: keyof CanvasLinks,
 		canvasLinks: CanvasLinks
 	) {
@@ -112,8 +112,12 @@ import {
 		);
 		// eslint-disable-next-line no-mixed-operators
 		const evenPeriod = Number(relativePeriod) * 2;
-		const absPeriod = evenPeriod - (blueOrOrange === "Blue" ? 0 : 1);
-		openCanvas(String(absPeriod), canvasLinks);
+		const absPeriod = (evenPeriod -
+			(blueOrOrange === "Blue" ? 0 : 1)) as Exclude<
+			keyof typeof canvasLinks,
+			"g" | "main"
+		>;
+		openCanvas(absPeriod, canvasLinks);
 	})(
 		new Date(),
 		SCHOOL_HOLIDAYS,
