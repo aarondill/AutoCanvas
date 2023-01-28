@@ -62,7 +62,7 @@ const CANVAS_LINKS = {
 	7: "courses/268059",
 } as const;
 
-export {
+export const DATA = {
 	SCHOOL_HOLIDAYS,
 	SCHEDULES,
 	FIRST_DAY_OF_SCHOOL,
