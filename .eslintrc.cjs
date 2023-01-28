@@ -7,6 +7,13 @@ module.exports = {
 		sourceType: "module",
 		impliedStrict: true,
 	},
+	overrides: [
+		{
+			files: ["tests/**"],
+			plugins: ["jest"],
+			extends: ["plugin:jest/recommended", "plugin:jest/style"],
+		},
+	],
 	env: {
 		browser: true,
 		node: true,

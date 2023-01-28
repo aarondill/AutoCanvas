@@ -1,12 +1,10 @@
 import {
-	SCHOOL_HOLIDAYS,
-	SCHEDULES,
-	FIRST_DAY_OF_SCHOOL,
-	SCHOOL_START_COLOR,
 	CANVAS_LINKS,
+	FIRST_DAY_OF_SCHOOL,
+	SCHEDULES,
+	SCHOOL_HOLIDAYS,
+	SCHOOL_START_COLOR,
 } from "./data";
-/*281 chars shorter than 1.0 && readable!*/
-/*70 main lines, 63 data lines; 133 total lines*/
 (function () {
 	function toMilliseconds(hr = 0, min = 0, sec = 0, mSec = 0) {
 		// eslint-disable-next-line no-mixed-operators
