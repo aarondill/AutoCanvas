@@ -62,11 +62,7 @@ function findBlueOrange(
 		if (!isWeekend(incrementor) && !isHoliday(incrementor, schoolHolidays)) {
 			count++;
 		}
-		if (incrementor.getDay() === 5) {
-			incrementor.setDate(1); /*skip weekends*/
-		} else {
-			incrementor.setDate(incrementor.getDate() + 1);
-		}
+		incrementor.setDate(incrementor.getDate() + 1);
 	}
 	const checkNum = startColor === "Orange" ? 0 : 1;
 	const dateColor = count % 2 === checkNum ? "Blue" : "Orange";
@@ -115,15 +111,15 @@ function main(
 	>;
 	openCanvas(absPeriod, canvasLinks);
 }
-if (!window.jest)
-	main(
-		new Date(),
-		SCHOOL_HOLIDAYS,
-		SCHEDULES,
-		FIRST_DAY_OF_SCHOOL,
-		SCHOOL_START_COLOR,
-		CANVAS_LINKS
-	);
+
+main(
+	new Date(),
+	SCHOOL_HOLIDAYS,
+	SCHEDULES,
+	FIRST_DAY_OF_SCHOOL,
+	SCHOOL_START_COLOR,
+	CANVAS_LINKS
+);
 
 /**
  * @Developer_Warning - Do *not* use!
