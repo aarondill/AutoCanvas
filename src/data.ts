@@ -4,14 +4,14 @@ const SCHEDULES = {
 		"1": { start: [7, 20], end: [8, 55] },
 		"2": { start: [8, 55], end: [10, 40] },
 		"3": { start: [10, 40], end: [12, 53] },
-		"4": { start: [12, 53], end: [14, 25] },
+		"4": { start: [12, 53], end: [14, 35] },
 	},
 	grizzly: {
 		"1": { start: [7, 20], end: [8, 43] },
 		"2": { start: [8, 43], end: [10, 13] },
 		g: { start: [10, 13], end: [10, 50] },
 		"3": { start: [10, 50], end: [13, 0] },
-		"4": { start: [13, 0], end: [14, 25] },
+		"4": { start: [13, 0], end: [14, 35] },
 	},
 } as const;
 const FIRST_DAY_OF_SCHOOL = new Date("8/10/2022");
