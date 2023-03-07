@@ -10,11 +10,7 @@ function toMilliseconds(hr = 0, min = 0, sec = 0, mSec = 0) {
 	return mSec + (sec + (min + hr * 60) * 60) * 1000;
 }
 function getDatesFromStrings(strArr: readonly string[]) {
-	const resultsArray: Date[] = [];
-	return strArr.reduce((dates, str) => {
-		dates.push(new Date(str));
-		return dates;
-	}, resultsArray);
+	return strArr.map(str => new Date(str));
 }
 function isHoliday(date: Date, holidays: Date[]) {
 	const dateFormatter = Intl.DateTimeFormat("en-US", { dateStyle: "short" });
@@ -54,7 +50,7 @@ function findBlueOrange(
 	firstSchool: Date,
 	schoolHolidays: Date[],
 	startColor: "Blue" | "Orange"
-) {
+): "Blue" | "Orange" {
 	/*start firstSchool --> date;*/
 	const incrementor: Date = firstSchool;
 	let count = 0;
@@ -87,7 +83,7 @@ function main(
 ) {
 	const schoolHolidayDates = getDatesFromStrings(schoolHolidays);
 	const schoolStart = toMilliseconds(7, 20); // Evil hardcoding
-	const schoolEnd = toMilliseconds(14, 25); // Evil hardcoding
+	const schoolEnd = toMilliseconds(14, 35); // Evil hardcoding
 	if (
 		isHoliday(today, schoolHolidayDates) ||
 		isWeekend(today) ||
@@ -103,7 +99,6 @@ function main(
 		schoolHolidayDates,
 		firstColor
 	);
-	// eslint-disable-next-line no-mixed-operators
 	const evenPeriod = Number(relativePeriod) * 2;
 	const absPeriod = (evenPeriod - (blueOrOrange === "Blue" ? 0 : 1)) as Exclude<
 		keyof typeof canvasLinks,

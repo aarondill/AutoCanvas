@@ -50,16 +50,16 @@ const SCHOOL_HOLIDAYS = [
 	"4/10/2023",
 ] as const;
 const CANVAS_LINKS = {
-	main: "https://conroeisd.instructure.com/",
-	g: "courses/244170",
-	2: "courses/272770",
-	4: "courses/269874",
-	6: "courses/268640",
-	8: "courses/273548",
-	1: "courses/271285",
-	3: "courses/267975",
-	5: "courses/272738",
-	7: "courses/268059",
+	main: "https://conroeisd.instructure.com/" as const,
+	g: "courses/244170" as const,
+	2: "courses/272770" as const,
+	4: "courses/269874" as const,
+	6: "courses/268640" as const,
+	8: "courses/273548" as const,
+	1: "courses/271285" as const,
+	3: "courses/267975" as const,
+	5: "courses/272738" as const,
+	7: "courses/268059" as const,
 } as const;
 
 export {
