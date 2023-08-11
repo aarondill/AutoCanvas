@@ -13,20 +13,20 @@
   ],
   "scripts": {
     "clean": "rimraf ./dist",
-    "compile": "yarpm run test && yarpm run compile:webpack",
+    "compile": "yarpm run clean && yarpm run test && yarpm run compile:webpack",
     "compile:webpack": "webpack",
     "lint:sort": "sort-package-json",
     "lint:eslint": "eslint . --fix --ext .js,.ts,.mjs,.mts,.cjs,.cts,.tsx,.jsx",
     "lint": "yarpm run lint:sort && yarpm run lint:eslint",
-    "package": "yarpm run test && yarpm run package:webpack",
+    "package": "yarpm run clean && yarpm run test && yarpm run package:webpack",
     "package:webpack": "webpack --mode production --devtool hidden-source-map",
     "release": "release-it",
-    "pretest": "yarpm run clean && yarpm run typecheck-root && yarpm run lint",
-    "test": "jest",
-    "typecheck": "yarpm run typecheck-root && tsc --noEmit -p tsconfig.json",
-    "typecheck-root": "tsc -p ./tsconfig.root.json",
-    "prewatch": "yarpm run clean",
-    "watch": "webpack --watch"
+    "test": "yarpm run clean && yarpm run test:typecheck && yarpm run lint && yarpm run test:jest",
+    "test:jest": "jest",
+    "test:typecheck": "yarpm run test:typecheck:root && tsc --noEmit -p tsconfig.json",
+    "test:typecheck:root": "tsc -p ./tsconfig.root.json",
+    "watch": "yarpm run clean && yarpm run watch:webpack",
+    "watch:webpack": "webpack --watch"
   },
   "devDependencies": {
     "@types/jest": "^29.5.3",
