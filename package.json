@@ -16,7 +16,7 @@
 		"compile": "yarpm run clean && yarpm run test && yarpm run compile:webpack",
 		"compile:webpack": "webpack",
 		"lint": "yarpm run lint:sort && yarpm run lint:sort && yarpm run lint:eslint",
-		"lint:prettier": "prettier -w src/**/*.{js,ts,mjs,mts,cjs,cts,tsx,jsx}",
+		"lint:prettier": "prettier -w .",
 		"lint:eslint": "eslint . --fix --ext .js,.ts,.mjs,.mts,.cjs,.cts,.tsx,.jsx",
 		"lint:sort": "sort-package-json",
 		"package": "yarpm run clean && yarpm run test && yarpm run package:webpack",

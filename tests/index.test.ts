@@ -23,7 +23,7 @@ windowSpy.mockImplementation(() => {
 
 //!! This *does not* run the code in the import, only imports the types of the export
 // This is required to keep type-safety while later dynamically importing.
-type ExportedForTesting = typeof import("../src/index")["exportedForTesting"];
+type ExportedForTesting = (typeof import("../src/index"))["exportedForTesting"];
 let betweenTime: ExportedForTesting["betweenTime"],
 	findBlueOrange: ExportedForTesting["findBlueOrange"],
 	findPeriod: ExportedForTesting["findPeriod"],
