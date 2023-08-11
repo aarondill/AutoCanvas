@@ -243,3 +243,6 @@ dist
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/backup,firebase,git,vercel,visualstudiocode,dotenv,nextjs,yarn,node
+
+pnpm-lock.yaml
+package-lock.json
