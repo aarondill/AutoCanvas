@@ -31,11 +31,10 @@ interface Schedule {
   end: readonly [number, number];
 }
 interface Schedules {
-  grizzly: Record<string | number, Schedule>;
   normal: Record<string | number, Schedule>;
 }
-function findPeriod(date: Date, isGrizzly: boolean, schedules: Schedules) {
-  const schedule = isGrizzly ? schedules.grizzly : schedules.normal;
+function findPeriod(date: Date, schedules: Schedules) {
+  const schedule = schedules.normal;
   for (const p of Object.keys(schedule)) {
     const [hr, min] = schedule[p].start;
     const [endHr, endMin] = schedule[p].end;
@@ -79,7 +78,7 @@ function main(
   periodSchedules: Schedules,
   firstSchoolDay: Date,
   firstColor: "Blue" | "Orange",
-  canvasLinks: Record<"g" | "main" | number, string>
+  canvasLinks: Record<"main" | number, string>
 ) {
   const schoolHolidayDates = getDatesFromStrings(schoolHolidays);
   const schoolStart = toMilliseconds(7, 20); // Evil hardcoding
@@ -90,9 +89,7 @@ function main(
     !betweenTime(today, schoolStart, schoolEnd)
   )
     return openCanvas("main", canvasLinks);
-  const IS_GRIZZLY = today.getDay() === 2 || today.getDay() === 3;
-  const relativePeriod = findPeriod(today, IS_GRIZZLY, periodSchedules);
-  if (relativePeriod === "g") return openCanvas("g", canvasLinks);
+  const relativePeriod = findPeriod(today, periodSchedules);
   const blueOrOrange = findBlueOrange(
     today,
     firstSchoolDay,
@@ -102,7 +99,7 @@ function main(
   const evenPeriod = Number(relativePeriod) * 2;
   const absPeriod = (evenPeriod - (blueOrOrange === "Blue" ? 0 : 1)) as Exclude<
     keyof typeof canvasLinks,
-    "g" | "main"
+    "main"
   >;
   openCanvas(absPeriod, canvasLinks);
 }
