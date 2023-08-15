@@ -4,11 +4,13 @@
 // import path from "path";
 import TerserPlugin from "terser-webpack-plugin";
 import { fileURLToPath } from "url";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import HtmlInlineScriptPlugin from "html-inline-script-webpack-plugin";
 
 /** @typedef {import('webpack').Configuration} WebpackConfig **/
 
 /** @type function: WebpackConfig */
-const extensionConfig = (env, argv) => {
+const extensionConfig = (_env, argv) => {
 	return {
 		target: "web",
 		mode: "none", // this leaves the source code as close as possible to the original (when packaging we set this to 'production')
@@ -18,14 +20,30 @@ const extensionConfig = (env, argv) => {
 			minimize: argv.mode === "production",
 			minimizer: [new TerserPlugin()],
 		},
-		entry: "./src/index.ts", // the entry point of this extension, 📖 -> https://webpack.js.org/configuration/entry-context/
+		plugins: [
+			{
+				apply(compiler) {
+					compiler.hooks.compilation.tap("DataUrlAdder", compilation => {
+						HtmlWebpackPlugin.getHooks(compilation).beforeEmit.tap(
+							"Add data url",
+							// eslint-disable-next-line no-extra-parens
+							data => ((data.html = "data:text/html," + data.html), data)
+						);
+					});
+				},
+			},
+			new HtmlWebpackPlugin({
+				// *Just* include script tags
+				templateContent: "",
+				inject: "body",
+			}),
+			new HtmlInlineScriptPlugin(),
+		],
 		output: {
-			// the bundle is stored in the 'dist' folder (check package.json), 📖 -> https://webpack.js.org/configuration/output/
 			path: fileURLToPath(new URL("dist", import.meta.url)),
-			filename: "index.js",
+			clean: true,
 		},
 		resolve: {
-			// support reading TypeScript and JavaScript files, 📖 -> https://github.com/TypeStrong/ts-loader
 			extensions: [".ts", ".js"],
 		},
 		module: {
@@ -33,15 +51,12 @@ const extensionConfig = (env, argv) => {
 				{
 					test: /\.ts$/,
 					exclude: /node_modules/,
-					use: [
-						{
-							loader: "ts-loader",
-						},
-					],
+					use: [{ loader: "ts-loader" }],
 				},
 			],
 		},
-		devtool: "nosources-source-map",
+		devtool:
+			argv.mode === "production" ? "inline-source-map" : "hidden-source-map",
 	};
 };
 export default extensionConfig;
