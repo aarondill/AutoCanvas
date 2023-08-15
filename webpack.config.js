@@ -55,8 +55,7 @@ const extensionConfig = (_env, argv) => {
 				},
 			],
 		},
-		devtool:
-			argv.mode === "production" ? "inline-source-map" : "hidden-source-map",
+		devtool: argv.mode === "production" ? undefined : "inline-source-map",
 	};
 };
 export default extensionConfig;
