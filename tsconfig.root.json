@@ -3,7 +3,8 @@
 		"noEmit": true,
 		"allowJs": true,
 		"checkJs": true,
-		"rootDir": "."
+		"rootDir": ".",
+		"noImplicitAny": false
 	},
 	"extends": "./tsconfig.json",
 	"include": ["*", "**/*", ".*", "**/.*"],
