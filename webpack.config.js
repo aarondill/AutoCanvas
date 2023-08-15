@@ -11,13 +11,14 @@ import HtmlInlineScriptPlugin from "html-inline-script-webpack-plugin";
 
 /** @type function: WebpackConfig */
 const extensionConfig = (_env, argv) => {
+	const mode = argv.mode ?? "none";
 	return {
 		target: "web",
-		mode: "none", // this leaves the source code as close as possible to the original (when packaging we set this to 'production')
+		mode: mode, // this leaves the source code as close as possible to the original (when packaging we set this to 'production')
 
 		optimization: {
 			//Only minimize if production code
-			minimize: argv.mode === "production",
+			minimize: mode === "production",
 			minimizer: [new TerserPlugin()],
 		},
 		plugins: [
@@ -36,6 +37,7 @@ const extensionConfig = (_env, argv) => {
 				// *Just* include script tags
 				templateContent: "",
 				inject: "body",
+				scriptLoading: "blocking",
 			}),
 			new HtmlInlineScriptPlugin(),
 		],
@@ -55,7 +57,7 @@ const extensionConfig = (_env, argv) => {
 				},
 			],
 		},
-		devtool: argv.mode === "production" ? undefined : "inline-source-map",
+		devtool: mode === "production" ? undefined : "source-map",
 	};
 };
 export default extensionConfig;
