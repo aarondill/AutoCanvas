@@ -63,7 +63,7 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           name: Release ${{ github.ref_name }}
-          name: ${{ steps.tag.outputs.tag }}
+          tag: ${{ steps.tag.outputs.tag }}
           omitBody: true
           commit: ${ github.sha }
           artifacts: ./dist/index.html
