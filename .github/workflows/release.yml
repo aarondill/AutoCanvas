@@ -37,12 +37,14 @@ jobs:
           files: "npm-shrinkwrap.json"
 
       - name: Install npm dependencies (ci)
-        env: LOCK_EXISTS = ${{ steps.check_lock.outputs.files_exists == 'true' || steps.check_shrinkwrap.outputs.files_exists == 'true' }}
-        if: ${{ env.lock_exists }}
+        env:
+          LOCK_EXISTS: ${{ steps.check_lock.outputs.files_exists == 'true' || steps.check_shrinkwrap.outputs.files_exists == 'true' }}
+        if: ${{ env.LOCK_EXISTS }}
         run: npm ci
       - name: Install npm dependencies (install)
-        env: LOCK_EXISTS = ${{ steps.check_lock.outputs.files_exists == 'true' || steps.check_shrinkwrap.outputs.files_exists == 'true' }}
-        if: ${{ !env.lock_exists }}
+        env:
+          LOCK_EXISTS: ${{ steps.check_lock.outputs.files_exists == 'true' || steps.check_shrinkwrap.outputs.files_exists == 'true' }}
+        if: ${{ !env.LOCK_EXISTS }}
         run: npm install
 
       - name: Compile
