@@ -1,6 +1,7 @@
 name: Publish Release From Master
 
 on:
+  workflow_dispatch:
   push:
     paths:
       # Other paths likely don't need to be published
