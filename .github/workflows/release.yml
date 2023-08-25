@@ -57,34 +57,19 @@ jobs:
       - name: Set tag name
         id: tag
         run: printf '%s\n' "tag=v$(date +%Y%m%d.%H%M%S)" >> $GITHUB_OUTPUT
+
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1.1.4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: ${{ steps.tag.outputs.tag }}
-          release_name: Release ${{ github.ref_name }}
-          draft: true
-          prerelease: false
+          name: Release ${{ github.ref_name }}
+          name: ${{ steps.tag.outputs.tag }}
+          omitBody: true
+          commit: ${ github.sha }
+          artifacts: ./dist/index.html
+          artifactContentType: text/html
+          makeLatest: true
 
-      - name: Upload compiled file to release
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: "./dist/index.html"
-          asset_name: index.html
-          asset_content_type: text/html
-
-      - name: Publish Release
-        uses: eregon/publish-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_id: ${{ steps.create_release.outputs.id }}
       - uses: eregon/keep-last-n-releases@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
