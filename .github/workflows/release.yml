@@ -53,14 +53,24 @@ jobs:
         run: npm run package
       - run: ls
 
-      - name: Create a release
-        uses: actions/create-release@v1.1.4
+      - name: Set tag name
+        id: tag
+        run: |
+          if [ "${{ github.event_name }}" != "push" ]; then
+            tag=v$(date +%Y%m%d.%H%M%S)
+          else
+            tag="${{ github.ref_name }}"
+          fi
+          echo "tag=$tag" >> $GITHUB_OUTPUT
+      - name: Create Release
         id: create_release
+        uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ steps.tag.outputs.tag }}
+          release_name: ${{ steps.tag.outputs.tag }}
           draft: true
           prerelease: false
 
