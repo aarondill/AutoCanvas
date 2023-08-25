@@ -81,8 +81,9 @@ function main(
 	canvasLinks: Record<"main" | number, string>
 ) {
 	const schoolHolidayDates = getDatesFromStrings(schoolHolidays);
-	const schoolStart = toMilliseconds(7, 20); // Evil hardcoding
-	const schoolEnd = toMilliseconds(14, 35); // Evil hardcoding
+
+	const schoolStart = toMilliseconds(...periodSchedules.normal[1].start);
+	const schoolEnd = toMilliseconds(...periodSchedules.normal[4].end);
 	if (
 		isHoliday(today, schoolHolidayDates) ||
 		isWeekend(today) ||
