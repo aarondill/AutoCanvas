@@ -67,7 +67,6 @@ jobs:
           omitBody: true
           commit: ${{ github.sha }}
           artifacts: ./dist/index.html
-          artifactContentType: text/html
           makeLatest: true
           draft: false
 
