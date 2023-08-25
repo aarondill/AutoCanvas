@@ -84,9 +84,15 @@ jobs:
           asset_name: index.html
           asset_content_type: text/html
 
-      - name: publish the draft release
+      - name: Publish Release
         uses: eregon/publish-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          release_id: ${{ steps.create_release.outputs.id }}
+          release_id: ${{ steps.create_release.outputs.release_id }}
+      - uses: eregon/keep-last-n-releases@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          n: 3
+          remove_tags_without_release: true
