@@ -65,7 +65,7 @@ jobs:
           name: Release ${{ github.ref_name }}
           tag: ${{ steps.tag.outputs.tag }}
           omitBody: true
-          commit: ${ github.sha }
+          commit: ${{ github.sha }}
           artifacts: ./dist/index.html
           artifactContentType: text/html
           makeLatest: true
