@@ -12,6 +12,8 @@ jobs:
   build:
     name: Publish Compiled
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # needed to make a release
     strategy:
       matrix:
         node-version: [latest]
