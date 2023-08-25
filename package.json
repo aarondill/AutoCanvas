@@ -19,7 +19,7 @@
 		"lint:eslint": "eslint . --fix --ext .js,.ts,.mjs,.mts,.cjs,.cts,.tsx,.jsx",
 		"lint:prettier": "prettier -w .",
 		"lint:sort": "sort-package-json",
-		"package": "yarpm run clean && yarpm run test && yarpm run package:webpack",
+		"package": "yarpm run clean && yarpm run package:webpack",
 		"package:webpack": "webpack --mode production",
 		"release": "release-it",
 		"test": "yarpm run clean && yarpm run test:typecheck && yarpm run lint && yarpm run test:jest",
