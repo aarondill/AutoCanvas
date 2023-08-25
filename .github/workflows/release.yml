@@ -69,6 +69,7 @@ jobs:
           artifacts: ./dist/index.html
           artifactContentType: text/html
           makeLatest: true
+          draft: false
 
       - uses: eregon/keep-last-n-releases@v1
         env:
