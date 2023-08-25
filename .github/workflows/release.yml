@@ -1,0 +1,77 @@
+name: Publish Release From Master
+
+on:
+  push:
+    paths:
+      # Other paths likely don't need to be published
+      - "src/**"
+      - "package.json"
+
+jobs:
+  build:
+    name: Publish Compiled
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [latest]
+        # node-version: [14.x, 16.x, 18.x, 20.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Check package-lock.json existence
+        id: check_lock
+        uses: andstor/file-existence-action@v2
+        with:
+          files: "package-lock.json"
+      - name: Check npm-shrinkwrap.json existence
+        id: check_shrinkwrap
+        if: steps.check_lock.outputs.files_exists == 'false'
+        uses: andstor/file-existence-action@v2
+        with:
+          files: "npm-shrinkwrap.json"
+
+      - name: Install npm dependencies (ci)
+        env: LOCK_EXISTS = ${{ steps.check_lock.outputs.files_exists == 'true' || steps.check_shrinkwrap.outputs.files_exists == 'true' }}
+        if: ${{ env.lock_exists }}
+        run: npm ci
+      - name: Install npm dependencies (install)
+        env: LOCK_EXISTS = ${{ steps.check_lock.outputs.files_exists == 'true' || steps.check_shrinkwrap.outputs.files_exists == 'true' }}
+        if: ${{ !env.lock_exists }}
+        run: npm install
+
+      - name: Compile
+        run: npm run package
+      - run: ls
+
+      - name: Create a release
+        uses: actions/create-release
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: true
+          prerelease: false
+
+      - name: Upload compiled file to release
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: "./dist/index.html"
+          asset_name: index.html
+          asset_content_type: text/html
+
+      - name: publish the draft release
+        uses: eregon/publish-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ steps.create_release.outputs.id }}
