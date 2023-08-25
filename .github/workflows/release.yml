@@ -40,7 +40,7 @@ jobs:
         env:
           LOCK_EXISTS: ${{ steps.check_lock.outputs.files_exists == 'true' || steps.check_shrinkwrap.outputs.files_exists == 'true' }}
         if: ${{ env.LOCK_EXISTS }}
-        run: npm ci
+        run: echo "LOCK_EXISTS=$LOCK_EXISTS" && npm ci
       - name: Install npm dependencies (install)
         env:
           LOCK_EXISTS: ${{ steps.check_lock.outputs.files_exists == 'true' || steps.check_shrinkwrap.outputs.files_exists == 'true' }}
