@@ -22,7 +22,7 @@
 		"package": "yarpm run clean && yarpm run package:webpack",
 		"package:webpack": "webpack --mode production",
 		"release": "release-it",
-		"test": "yarpm run clean && yarpm run test:typecheck && yarpm run lint && yarpm run test:jest",
+		"test": "yarpm run test:typecheck && yarpm run lint && yarpm run test:jest",
 		"test:jest": "jest",
 		"test:typecheck": "yarpm run test:typecheck:root && tsc --noEmit -p tsconfig.json",
 		"test:typecheck:root": "tsc -p ./tsconfig.root.json",
