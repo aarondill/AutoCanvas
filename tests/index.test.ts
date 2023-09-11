@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { beforeEach, it, describe, expect } from "bun:test";
-import { exportedForTesting } from "../src/index";
+import { exportedForTesting } from "../src/lib";
 globalThis.IS_TEST = true;
 const {
 	betweenTime,
