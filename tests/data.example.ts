@@ -1,3 +1,8 @@
+declare global {
+	// var is neccisary here.
+	// eslint-disable-next-line no-var
+	var IS_TEST: boolean | undefined;
+}
 const SCHOOL_START_COLOR = "Orange" as const; /*Orange||Blue*/
 const SCHEDULES = {
 	normal: {

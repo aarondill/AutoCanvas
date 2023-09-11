@@ -1,5 +1,14 @@
-const SCHOOL_START_COLOR = "Orange" as const; /*Orange||Blue*/
-const SCHEDULES = {
+declare global {
+	// var is neccisary here.
+	// eslint-disable-next-line no-var
+	var IS_TEST: boolean | undefined;
+}
+export const COLORS_BLUE = 0;
+export const COLORS_ORANGE = 1;
+export type Color = typeof COLORS_BLUE | typeof COLORS_ORANGE;
+
+export const SCHOOL_START_COLOR = COLORS_ORANGE;
+export const SCHEDULES = {
 	normal: {
 		"1": { start: [7, 15], end: [8, 48] },
 		"2": { start: [8, 48], end: [10, 30] },
@@ -7,8 +16,8 @@ const SCHEDULES = {
 		"4": { start: [12, 55], end: [14, 35] },
 	},
 } as const;
-const FIRST_DAY_OF_SCHOOL = new Date("8/09/2023");
-const SCHOOL_HOLIDAYS = [
+export const FIRST_DAY_OF_SCHOOL = new Date("8/09/2023");
+export const SCHOOL_HOLIDAYS = [
 	"9/4/2023",
 	"10/6/2023",
 	"10/9/2023",
@@ -42,7 +51,7 @@ const SCHOOL_HOLIDAYS = [
 	"4/1/2024",
 	"4/19/2024",
 ] as const;
-const CANVAS_LINKS = {
+export const CANVAS_LINKS = {
 	main: "https://conroeisd.instructure.com/",
 	2: "courses/284766",
 	4: "courses/284766",
@@ -53,11 +62,3 @@ const CANVAS_LINKS = {
 	5: "courses/281822",
 	7: "courses/279474",
 } as const;
-
-export {
-	SCHOOL_HOLIDAYS,
-	SCHEDULES,
-	FIRST_DAY_OF_SCHOOL,
-	SCHOOL_START_COLOR,
-	CANVAS_LINKS,
-};
