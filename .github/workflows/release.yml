@@ -15,43 +15,18 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write # needed to make a release
-    strategy:
-      matrix:
-        node-version: [latest]
-        # node-version: [14.x, 16.x, 18.x, 20.x]
 
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - uses: oven-sh/setup-bun@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          bun-version: latest
 
-      - name: Check package-lock.json existence
-        id: check_lock
-        uses: andstor/file-existence-action@v2
-        with:
-          files: "package-lock.json"
-      - name: Check npm-shrinkwrap.json existence
-        id: check_shrinkwrap
-        if: steps.check_lock.outputs.files_exists == 'false'
-        uses: andstor/file-existence-action@v2
-        with:
-          files: "npm-shrinkwrap.json"
-
-      - name: Install npm dependencies (ci)
-        env:
-          LOCK_EXISTS: ${{ steps.check_lock.outputs.files_exists == 'true' || steps.check_shrinkwrap.outputs.files_exists == 'true' }}
-        if: ${{ env.LOCK_EXISTS == 'true' }}
-        run: npm ci
-      - name: Install npm dependencies (install)
-        env:
-          LOCK_EXISTS: ${{ steps.check_lock.outputs.files_exists == 'true' || steps.check_shrinkwrap.outputs.files_exists == 'true' }}
-        if: ${{ env.LOCK_EXISTS == 'false' }}
-        run: npm install
+      - name: Install npm dependencies
+        run: bun install --frozen-lockfile
 
       - name: Compile
-        run: npm run package
+        run: bun run build
       - run: ls
 
       - name: Set tag name
