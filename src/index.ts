@@ -1,9 +1,12 @@
+/// <reference lib="dom" />
 import {
 	CANVAS_LINKS,
 	FIRST_DAY_OF_SCHOOL,
 	SCHEDULES,
 	SCHOOL_HOLIDAYS,
 	SCHOOL_START_COLOR,
+	COLORS,
+	type Color,
 } from "./data";
 function toMilliseconds(hr = 0, min = 0, sec = 0, mSec = 0) {
 	// eslint-disable-next-line no-mixed-operators
@@ -48,8 +51,8 @@ function findBlueOrange(
 	date: Date,
 	firstSchool: Date,
 	schoolHolidays: Date[],
-	startColor: "Blue" | "Orange"
-): "Blue" | "Orange" {
+	startColor: Color
+): Color {
 	/*start firstSchool --> date;*/
 	const incrementor: Date = firstSchool;
 	let count = 0;
@@ -59,27 +62,30 @@ function findBlueOrange(
 		}
 		incrementor.setDate(incrementor.getDate() + 1);
 	}
-	const checkNum = startColor === "Orange" ? 0 : 1;
-	const dateColor = count % 2 === checkNum ? "Blue" : "Orange";
+	const checkNum = startColor === COLORS.ORANGE ? 0 : 1;
+	const dateColor = count % 2 === checkNum ? COLORS.BLUE : COLORS.ORANGE;
 	return dateColor;
 }
 function openCanvas<CanvasLinks extends Record<string, string>>(
 	id: keyof CanvasLinks,
 	canvasLinks: CanvasLinks
-) {
+): string {
 	let canvasPage = canvasLinks.main;
 	if (id !== "main") canvasPage += canvasLinks[id];
-	if (location.protocol === "data:") location.href = canvasPage;
-	else window.open(canvasPage);
+	if (!globalThis.IS_TEST) {
+		if (location.protocol === "data:") location.href = canvasPage;
+		else window.open(canvasPage);
+	}
+	return canvasPage;
 }
 function main(
 	today: Date,
 	schoolHolidays: readonly string[],
 	periodSchedules: Schedules,
 	firstSchoolDay: Date,
-	firstColor: "Blue" | "Orange",
+	firstColor: Color,
 	canvasLinks: Record<"main" | number, string>
-) {
+): string {
 	const schoolHolidayDates = getDatesFromStrings(schoolHolidays);
 
 	const schoolStart = toMilliseconds(...periodSchedules.normal[1].start);
@@ -98,11 +104,8 @@ function main(
 		firstColor
 	);
 	const evenPeriod = Number(relativePeriod) * 2;
-	const absPeriod = (evenPeriod - (blueOrOrange === "Blue" ? 0 : 1)) as Exclude<
-		keyof typeof canvasLinks,
-		"main"
-	>;
-	openCanvas(absPeriod, canvasLinks);
+	const absPeriod = evenPeriod - (blueOrOrange === COLORS.BLUE ? 0 : 1);
+	return openCanvas(absPeriod, canvasLinks);
 }
 
 main(

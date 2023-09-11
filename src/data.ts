@@ -1,4 +1,15 @@
-const SCHOOL_START_COLOR = "Orange" as const; /*Orange||Blue*/
+declare global {
+	// var is neccisary here.
+	// eslint-disable-next-line no-var
+	var IS_TEST: boolean | undefined;
+}
+const COLORS = {
+	BLUE: 0,
+	ORANGE: 1,
+} as const;
+export type Color = (typeof COLORS)[keyof typeof COLORS];
+
+const SCHOOL_START_COLOR = COLORS.ORANGE;
 const SCHEDULES = {
 	normal: {
 		"1": { start: [7, 15], end: [8, 48] },
@@ -60,4 +71,5 @@ export {
 	FIRST_DAY_OF_SCHOOL,
 	SCHOOL_START_COLOR,
 	CANVAS_LINKS,
+	COLORS,
 };

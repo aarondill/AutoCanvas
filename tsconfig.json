@@ -1,18 +1,28 @@
 {
 	"compilerOptions": {
-		"target": "ES2022",
-		"module": "ES2022",
-		"lib": ["ES2022", "DOM"],
+		"types": ["bun-types"], // add Bun type definitions
+
+		"lib": ["ESNext", "DOM", "DOM.Iterable"],
+		"module": "ESNext",
+		"target": "ESNext",
+
+		"moduleResolution": "bundler",
+		"noEmit": true,
+		"allowImportingTsExtensions": true,
+		"moduleDetection": "force",
+
+		"jsx": "react-jsx", // support JSX
+		"allowJs": true, // allow importing `.js` from `.ts`
+		"esModuleInterop": true, // allow default imports for CommonJS modules
+
 		"outDir": "./dist",
 		"rootDir": "./src",
-		"moduleResolution": "node",
 		"alwaysStrict": true,
 		// Don't output .d.ts or source maps
 		"declaration": false,
 		"sourceMap": false,
 		// remove unused imports
 		"importsNotUsedAsValues": "remove",
-		"esModuleInterop": true,
 		"checkJs": true,
 		"forceConsistentCasingInFileNames": true,
 		"noImplicitAny": true,
@@ -22,6 +32,5 @@
 		"skipLibCheck": true,
 		"strict": true
 	},
-	"include": ["src"],
 	"exclude": ["dist", "node_modules"]
 }
