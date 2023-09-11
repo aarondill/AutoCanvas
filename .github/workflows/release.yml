@@ -6,7 +6,7 @@ on:
     paths:
       # Other paths likely don't need to be published
       - "src/**"
-      - "package.json"
+      - "bun.lockb"
       - ".github/workflows/**"
 
 jobs:
