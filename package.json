@@ -1,46 +1,45 @@
 {
-  "name": "autocanvas",
-  "version": "1.0.0",
-  "private": true,
-  "description": "",
-  "license": "MIT",
-  "author": "",
-  "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "compile": "bun ./build.ts",
-    "lint": "bun run lint:sort && bun run lint:sort && bun run lint:eslint",
-    "lint:eslint": "eslint . --fix --ext .js,.ts,.mjs,.mts,.cjs,.cts,.tsx,.jsx",
-    "lint:prettier": "prettier -w .",
-    "lint:sort": "sort-package-json",
-    "release": "release-it",
-    "test": "bun run test:typecheck && bun run lint && bun run test:bun",
-    "test:bun": "bun test tests",
-    "test:typecheck": "tsc -p ./tsconfig.eslint.json"
-  },
-  "dependencies": {
-    "bun-types": "^1.0.1",
-    "eslint-plugin-compat": "^4.2.0"
-  },
-  "devDependencies": {
-    "@types/node": "^20.4.9",
-    "@typescript-eslint/eslint-plugin": "^6.3.0",
-    "@typescript-eslint/parser": "^6.3.0",
-    "bookmarklet": "^3.0.0",
-    "eslint": "^8.47.0",
-    "prettier": "^3.0.1",
-    "release-it": "^16.1.4",
-    "sort-package-json": "^2.5.1",
-    "typescript": "^5.1.6"
-  },
-  "publishConfig": {
-    "access": "public"
-  },
-  "contributers": [
-    "Aaron Dill"
-  ]
+	"name": "autocanvas",
+	"version": "1.0.0",
+	"private": true,
+	"description": "",
+	"license": "MIT",
+	"author": "",
+	"type": "module",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "bun ./build.ts",
+		"lint": "bun run lint:sort && bun run lint:prettier && bun run lint:eslint",
+		"lint:eslint": "eslint . --fix --ext .js,.ts,.mjs,.mts,.cjs,.cts,.tsx,.jsx",
+		"lint:prettier": "prettier -w .",
+		"lint:sort": "sort-package-json",
+		"release": "release-it",
+		"test": "bun run test:typecheck && bun run lint && bun run test:bun",
+		"test:bun": "bun test tests",
+		"test:typecheck": "tsc -p ./tsconfig.eslint.json"
+	},
+	"dependencies": {
+		"bun-types": "^1.0.1",
+		"eslint-plugin-compat": "^4.2.0"
+	},
+	"devDependencies": {
+		"@types/node": "^20.4.9",
+		"@typescript-eslint/eslint-plugin": "^6.3.0",
+		"@typescript-eslint/parser": "^6.3.0",
+		"eslint": "^8.47.0",
+		"prettier": "^3.0.1",
+		"release-it": "^16.1.4",
+		"sort-package-json": "^2.5.1",
+		"typescript": "^5.1.6"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"contributers": [
+		"Aaron Dill"
+	]
 }
