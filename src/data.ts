@@ -3,11 +3,13 @@ declare global {
 	// eslint-disable-next-line no-var
 	var IS_TEST: boolean | undefined;
 }
-export const COLORS_BLUE = 0;
-export const COLORS_ORANGE = 1;
-export type Color = typeof COLORS_BLUE | typeof COLORS_ORANGE;
+export const COLORS = {
+	BLUE: "BLUE",
+	ORANGE: "ORANGE",
+};
+export type Color = (typeof COLORS)[keyof typeof COLORS];
 
-export const SCHOOL_START_COLOR = COLORS_ORANGE;
+export const SCHOOL_START_COLOR = COLORS.BLUE;
 export const SCHEDULES = {
 	normal: {
 		"1": { start: [7, 15], end: [8, 48] },

@@ -1,5 +1,5 @@
 /// <reference lib="dom" />
-import { COLORS_BLUE, COLORS_ORANGE, type Color } from "./data";
+import { COLORS, type Color } from "./data";
 function toMilliseconds(hr = 0, min = 0, sec = 0, mSec = 0) {
 	// eslint-disable-next-line no-mixed-operators
 	return mSec + (sec + (min + hr * 60) * 60) * 1000;
@@ -54,8 +54,8 @@ function findBlueOrange(
 		}
 		incrementor.setDate(incrementor.getDate() + 1);
 	}
-	const checkNum = startColor === COLORS_ORANGE ? 0 : 1;
-	const dateColor = count % 2 === checkNum ? COLORS_BLUE : COLORS_ORANGE;
+	const checkNum = startColor === COLORS.ORANGE ? 0 : 1;
+	const dateColor = count % 2 === checkNum ? COLORS.BLUE : COLORS.ORANGE;
 	return dateColor;
 }
 function openCanvas<CanvasLinks extends Record<string, string>>(
@@ -96,7 +96,7 @@ export function main(
 		firstColor
 	);
 	const evenPeriod = Number(relativePeriod) * 2;
-	const absPeriod = evenPeriod - (blueOrOrange === COLORS_BLUE ? 0 : 1);
+	const absPeriod = evenPeriod - (blueOrOrange === COLORS.BLUE ? 0 : 1);
 	return openCanvas(absPeriod, canvasLinks);
 }
 
