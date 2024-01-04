@@ -55,8 +55,8 @@ export const SCHOOL_HOLIDAYS = [
 ] as const;
 export const CANVAS_LINKS = {
 	main: "https://conroeisd.instructure.com/",
-	2: "",
-	4: "",
+	2: "courses/295155",
+	4: "courses/295155",
 	6: "courses/296852",
 	8: "courses/296852",
 	1: "courses/294043",
