@@ -58,7 +58,7 @@ export const CANVAS_LINKS = {
 	2: "",
 	4: "",
 	6: "courses/296852",
-	8: "",
+	8: "courses/296852",
 	1: "courses/294043",
 	3: "courses/297296",
 	5: "courses/296951",
