@@ -9,7 +9,7 @@ export const COLORS = {
 };
 export type Color = (typeof COLORS)[keyof typeof COLORS];
 
-export const SCHOOL_START_COLOR = COLORS.BLUE;
+export const SCHOOL_START_COLOR = COLORS.ORANGE;
 export const SCHEDULES = {
 	normal: {
 		"1": { start: [7, 15], end: [8, 48] },
