@@ -41,6 +41,7 @@ export const SCHOOL_HOLIDAYS = [
 	"1/1/2024",
 	"1/2/2024",
 	"1/15/2024",
+	"1/16/2024", // HACK: Bad weather "holiday"
 	"2/16/2024",
 	"2/19/2024",
 	"3/5/2024",
