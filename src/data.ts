@@ -18,50 +18,42 @@ export const SCHEDULES = {
 		"4": { start: [12, 55], end: [14, 35] },
 	},
 } as const;
-export const FIRST_DAY_OF_SCHOOL = new Date("8/09/2023");
-export const SCHOOL_HOLIDAYS = [
-	"9/4/2023",
-	"10/6/2023",
-	"10/9/2023",
-	"11/20/2023",
-	"11/21/2023",
-	"11/22/2023",
-	"11/23/2023",
-	"11/24/2023",
-	"12/18/2023",
-	"12/19/2023",
-	"12/20/2023",
-	"12/21/2023",
-	"12/22/2023",
-	"12/25/2023",
-	"12/26/2023",
-	"12/27/2023",
-	"12/28/2023",
-	"12/29/2023",
-	"1/1/2024",
-	"1/2/2024",
-	"1/15/2024",
-	"1/16/2024", // HACK: Bad weather "holiday"
-	"2/16/2024",
-	"2/19/2024",
-	"3/5/2024",
-	"3/11/2024",
-	"3/12/2024",
-	"3/13/2024",
-	"3/14/2024",
-	"3/15/2024",
-	"3/29/2024",
-	"4/1/2024",
-	"4/19/2024",
+export const FIRST_DAY_OF_SCHOOL = new Date("8/14/2024");
+
+function range(start: string, end: string) {
+	const startDate = new Date(start);
+	const endDate = new Date(end);
+	const dates = [];
+	while (startDate <= endDate) {
+		dates.push(new Date(startDate));
+		startDate.setDate(startDate.getDate() + 1);
+	}
+	return dates;
+}
+
+export const SCHOOL_HOLIDAYS: (string | Date)[] = [
+	"9/2/2024",
+	"10/11/2024",
+	"10/14/2024",
+	"11/4/2024",
+	"11/5/2024",
+	...range("11/25/2024", "11/29/2024"),
+	...range("12/23/2024", "1/6/2025"),
+	"1/6/2025",
+	"1/20/2025",
+	...range("2/14/2025", "2/17/2025"),
+	...range("3/10/2025", "3/14/2025"),
+	"4/18/2025",
+	"4/21/2025",
 ] as const;
 export const CANVAS_LINKS = {
 	main: "https://conroeisd.instructure.com/",
-	2: "courses/295155",
-	4: "courses/295155",
-	6: "courses/296852",
-	8: "courses/296852",
-	1: "courses/294043",
-	3: "courses/297296",
-	5: "courses/296951",
-	7: "courses/294925",
+	2: "courses/303448",
+	4: "",
+	6: "courses/307405",
+	8: "",
+	1: "courses/308420",
+	3: "",
+	5: "courses/307405",
+	7: "courses/304732",
 } as const;

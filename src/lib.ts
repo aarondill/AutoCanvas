@@ -4,7 +4,7 @@ function toMilliseconds(hr = 0, min = 0, sec = 0, mSec = 0) {
 	// eslint-disable-next-line no-mixed-operators
 	return mSec + (sec + (min + hr * 60) * 60) * 1000;
 }
-function getDatesFromStrings(strArr: readonly string[]) {
+function getDatesFromStrings(strArr: readonly (string | Date)[]) {
 	return strArr.map(str => new Date(str));
 }
 function isHoliday(date: Date, holidays: Date[]) {
@@ -72,7 +72,7 @@ function openCanvas<CanvasLinks extends Record<string, string>>(
 }
 export function main(
 	today: Date,
-	schoolHolidays: readonly string[],
+	schoolHolidays: readonly (string | Date)[],
 	periodSchedules: Schedules,
 	firstSchoolDay: Date,
 	firstColor: Color,
