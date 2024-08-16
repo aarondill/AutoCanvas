@@ -53,7 +53,7 @@ export const CANVAS_LINKS = {
 	6: "courses/307405",
 	8: "",
 	1: "courses/308420",
-	3: "",
+	3: "courses/303045",
 	5: "courses/307405",
 	7: "courses/304732",
 } as const;
