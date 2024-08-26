@@ -46,14 +46,15 @@ export const SCHOOL_HOLIDAYS: (string | Date)[] = [
 	"4/18/2025",
 	"4/21/2025",
 ] as const;
+
 export const CANVAS_LINKS = {
 	main: "https://conroeisd.instructure.com/",
-	2: "courses/303448",
-	4: "courses/308416",
-	6: "courses/307405",
+	2: "courses/303448/modules",
+	4: "courses/308416/modules",
+	6: "courses/307405/modules",
 	8: "",
-	1: "courses/308420",
-	3: "courses/303045",
-	5: "courses/307405",
-	7: "courses/304732",
+	1: "courses/308420/modules",
+	3: "courses/303045/modules",
+	5: "courses/307405/modules",
+	7: "courses/304732/modules",
 } as const;
