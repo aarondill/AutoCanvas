@@ -38,8 +38,7 @@ export const SCHOOL_HOLIDAYS: (string | Date)[] = [
 	"11/4/2024",
 	"11/5/2024",
 	...range("11/25/2024", "11/29/2024"),
-	...range("12/23/2024", "1/6/2025"),
-	"1/6/2025",
+	...range("12/23/2024", "1/5/2025"),
 	"1/20/2025",
 	...range("2/14/2025", "2/17/2025"),
 	...range("3/10/2025", "3/14/2025"),
@@ -48,13 +47,13 @@ export const SCHOOL_HOLIDAYS: (string | Date)[] = [
 ] as const;
 
 export const CANVAS_LINKS = {
-	main: "https://conroeisd.instructure.com/",
-	2: "courses/303448/modules",
-	4: "courses/308416/modules",
-	6: "courses/307405/modules",
+	main: "",
+	2: "courses/317926/modules",
+	4: "",
+	6: "courses/320177/modules",
 	8: "",
-	1: "courses/308420/modules",
-	3: "courses/303045/modules",
-	5: "courses/307405/modules",
-	7: "courses/304732/modules",
+	1: "courses/318005/modules",
+	3: "courses/321525/modules",
+	5: "courses/320177/modules",
+	7: "courses/321926/modules",
 } as const;
