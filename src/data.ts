@@ -47,7 +47,7 @@ export const SCHOOL_HOLIDAYS: (string | Date)[] = [
 ] as const;
 
 export const CANVAS_LINKS = {
-	main: "",
+	main: "https://conroeisd.instructure.com/",
 	2: "courses/317926/modules",
 	4: "",
 	6: "courses/320177/modules",
