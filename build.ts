@@ -43,8 +43,8 @@ async function main() {
 			const file = Bun.file(dest.replace(extensionRegex, ".html"));
 			const fileWriter = file.writer();
 			fileWriter.write("data:text/html,<script>");
-			fileWriter.write(await output.arrayBuffer());
-			fileWriter.write("</script>");
+			fileWriter.write((await output.text()).trim());
+			fileWriter.write("</script>\n");
 			await fileWriter.end();
 		} else {
 			await Bun.write(dest, output);
